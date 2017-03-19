@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load staticfiles i18n approval_tags %}
+
+
+{% block css_files %}
+
+    <link href="{% static 'landing/css/plugins/footable/footable.core.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+
+                        <div class="row">
+                            {% for approve in approve_items %}
+                                {% get_item_content_type_instance item=item as approve_content_type_instance %}
+                                <div class="ibox-content col-md-12">
+
+                                    <div class="row">
+                                        <form action="{% url 'approval:approve' approve_id=approve.id %}" method="post">
+                                            {% csrf_token %}
+{#                                            <div class="col-lg-1" style="margin-top: 15px">#}
+{#                                                <span class="fa fa-user fa-4x"></span>#}
+{#                                            </div><!-- end .col-lg -->#}
+                                            <div class="col-lg-4">
+                                                {% if approve.applicator %}
+                                                    <h3><b>{% trans "Applicant: " %}</b>
+                                                        <small style="font-size: 17px; color: #ed5565">{{ approve.applicator }}</small>
+                                                    </h3>
+                                                {% endif %}
+                                                <p>
+                                                    <b>{% trans "Type: " %}</b> <small style="font-size: 17px; color: #ed5565">{{ approve.verb }}</small>
+                                                    {% if approve.description %}<br>{{ approve.description }}{% endif %}
+                                                </p>
+                                                {% with approve.priority as pp %}
+                                                    <p><span class="btn btn-{% if pp == 'low' %}info{% elif pp == 'medium' %}warning{% else %}danger{% endif %}">
+                                                        {% trans "Priority: " %} {{ pp }}</span>
+                                                    </p>
+                                                {% endwith %}
+                                                {% if approve_content_type_instance %}<p><b>{% trans "Effected item: " %}</b> {{ approve_content_type_instance }}</p>{% endif %}
+                                                <i>{{ approve.timestamp|timesince }} {% trans "ago" %}</i>
+                                            </div>
+{#                                            <div class="col-lg-3">#}
+{##}
+{#                                            </div>#}
+                                            <div class="col-lg-6">
+{#                                                <label>{% trans "Changes: " %}</label>#}
+                                                <div class="well">
+                                                    {{ approve|render_changes }}
+                                                    <br>
+                                                    <input type="submit" value="accept" name="action_type" class="btn btn-primary btn-sm">
+                                                    <input type="submit" value="reject" name="action_type" class="btn btn-danger btn-sm">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div><!-- end .row -->
+
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+{#                        <div class="ibox-content">#}
+{##}
+{#                            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">#}
+{#                                <thead>#}
+{#                                    <tr>#}
+{##}
+{#                                        <th data-toggle="true">{% trans "Applicator" %}</th>#}
+{#                                        <th data-toggle="true">{% trans "Type" %}</th>#}
+{#                                        <th data-toggle="true">{% trans "Level" %}</th>#}
+{#                                        <th data-toggle="true">{% trans "Effected item" %}</th>#}
+{#                                        <th>{% trans "Description" %}</th>#}
+{#                                        <th data-hide="all">{% trans "Change requests (choose items to be changed)" %}</th>#}
+{#                                        <th>{% trans "Timestamp" %}</th>#}
+{#                                        <th class="text-center">{% trans "Your action" %}</th>#}
+{##}
+{#                                    </tr>#}
+{#                                </thead>#}
+{#                                <tbody>#}
+{#                                    {% for approve in approve_items %}#}
+{##}
+{#                                        <form action="{% url 'approval:approve' approve_id=approve.id %}" method="post">#}
+{##}
+{#                                            <div class="i-checks">#}
+{#                                                        <label>#}
+{#                                                            <input type="checkbox" name="first_name"/>#}
+{#                                                        </label> <b>#}
+{#                                                        "first_name": </b>Rezaooq   -->   Rezaooqvcx#}
+{#                                                    </div>#}
+{#                                                    <div class="i-checks">#}
+{#                                                        <label>#}
+{#                                                            <input type="checkbox" name="last_name"/>#}
+{#                                                        </label>#}
+{#                                                        <b> "last_name": </b>Torkaman Ahmadiooqdsf   -->   Torkaman Ahmadioo#}
+{#                                                    </div>#}
+{#                                                    <div class="i-checks">#}
+{#                                                        <label>#}
+{#                                                            <input type="checkbox" name="address_city"/>#}
+{#                                                        </label>#}
+{#                                                        <b> "address_city": </b>Tehran#}
+{#                                                        , Tehran, Iran   -->   Dehli#}
+{#                                                        , XYZ, India#}
+{#                                                    </div>#}
+{##}
+{#                                            {% csrf_token %}#}
+{#                                            <tr>#}
+{#                                                <td>#}
+{#                                                    <strong>{{ approve.applicator.username }}</strong>#}
+{#                                                </td>#}
+{#                                                <td>{{ approve.verb }}</td>#}
+{#                                                <td>{{ approve.priority }}</td>#}
+{#                                                <td>#}
+{#                                                    {{ approve_content_type_instance }}#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    {{ approve.description }}#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    <p>#}
+{##}
+{##}
+{#                                                        <label>#}
+{#                                                            <input type="checkbox"/>#}
+{#                                                        </label>#}
+{#                                                        <input type="hidden" name="test_checkbox[]" value="0" />#}
+{#                                                        {{ approve|render_changes }}#}
+    {#                                                    {% for change in approve.changes %}#}
+    {#                                                        {{ change }}#}
+    {#                                                    {% endfor %}#}
+{#                                                    </p>#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    {{ approve.timestamp|timesince }} {% trans "ago" %}#}
+{#                                                </td>#}
+{#                                                <td class="text-center">#}
+{#                                                    <input type="submit" value="accept" name="action_type" class="btn btn-primary btn-sm">#}
+{#                                                    <i class="fa fa-thumbs-o-up"></i> {% trans "Approve" %}#}
+{#                                                    <input type="submit" value="reject" name="action_type" class="btn btn-danger btn-sm">#}
+{#                                                    <i class="fa fa-thumbs-o-down"></i> {% trans "Reject" %}#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                        </form>#}
+{#                                    {% endfor %}#}
+{#                                </tbody>#}
+{#                                <tfoot>#}
+{#                                <tr>#}
+{#                                    <td colspan="6">#}
+{#                                        <ul class="pagination pull-right"></ul>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                                </tfoot>#}
+{#                            </table>#}
+{##}
+{#                        </div>#}
+                    </div>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}
+
+
+{% block js_files %}
+
+    <!-- FooTable -->
+    <script src="{% static 'landing/js/plugins/footable/footable.all.min.js' %}"></script>
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+
+            $('.footable').footable();
+
+            $('input[type=checkbox]').on("change",function(){
+                var target = $(this).parent().find('input[type=hidden]').val();
+                if(target == 0)
+                {
+                    target = 1;
+                }
+                else
+                {
+                    target = 0;
+                }
+                $(this).parent().find('input[type=hidden]').val(target);
+            });
+
+        });
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-04 07:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: approval/templates/approval/manage.html:32
+#, fuzzy
+#| msgid "Applicator: "
+msgid "Applicant: "
+msgstr "درخواست‌کننده"
+
+#: approval/templates/approval/manage.html:37
+msgid "Type: "
+msgstr "نوع"
+
+#: approval/templates/approval/manage.html:42
+msgid "Priority: "
+msgstr "اولویت"
+
+#: approval/templates/approval/manage.html:45
+msgid "Effected item: "
+msgstr ""
+
+#: approval/templates/approval/manage.html:46
+msgid "ago"
+msgstr "قبلی"
+
+#: approval/templatetags/approval_tags.py:49
+msgid ""
+"Below changes are on the queue to be applied to this item. Please wait for "
+"admin to approve/reject these changes."
+msgstr "لطفا منتظر بمانید تا تغییرات درخواستی توسط مدیر بررسی گردد"
+
+#: approval/templatetags/approval_tags.py:50
+msgid "Changes request "
+msgstr "تغییرات درخواستی"
+
+#: approval/views.py:138
+#, fuzzy
+#| msgid "Requested modifications: "
+msgid "Requested modifications have been discarded"
+msgstr "تغییرات درخواستی رد شد."
+
+#: approval/views.py:140
+msgid "Requested modifications have not been approved by admin."
+msgstr "تغییرات درخواستی از سوی مدیر تایید نشد."
+
+#: approval/views.py:147
+#, fuzzy
+#| msgid "Requested modifications: "
+msgid "Requested modifications have been approved."
+msgstr "تغییرات درخواستی اعمال شد."
+
+#: approval/views.py:149
+#, fuzzy
+#| msgid "Requested modifications: "
+msgid "Requested modifications have been approved by admin."
+msgstr "تغییرات درخواستی از سوی مدیر تایید شد."
+
+#~ msgid "You successfully rejected to apply these changes"
+#~ msgstr "تغییرات درخواستی رد شد"
+
+#~ msgid "Changes rejected to be applied with admin permission."
+#~ msgstr "تغییرات درخواستی از سوی مدیر تایید نشد"
+
+#~ msgid "You successfully accepted to apply these changes"
+#~ msgstr "تعییرات درخواستی اعمال شد"
+
+#~ msgid "Changes successfully applied by admin permission."
+#~ msgstr "تغییرات درخواستی از سوی مدیر تایید شد"
